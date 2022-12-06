@@ -39,17 +39,21 @@ struct Node {
 class Solution{
     public:
     /* Should return data of middle node. If linked list is empty, then  -1*/
-    int getMiddle(Node *head)
+   int getMiddle(Node *head)
     {
         // Your code here
-        Node* fast=head;
-        Node* slow=head;
-        while(fast!=NULL && fast->next!=NULL){
-            slow=slow->next;
-            fast=fast->next->next;
-            
+        if(head->next==NULL)
+        {
+            return head->data;
         }
-        return slow->data;
+        Node* temp1=head;
+        Node* temp2=head;
+        while( temp1!=NULL && temp1->next!=NULL)
+        {
+            temp1=temp1->next->next;
+            temp2=temp2->next;
+        }
+        return temp2->data;
     }
 };
 
