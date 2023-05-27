@@ -8,19 +8,16 @@ class Solution {
   public:
     int minimumEnergy(vector<int>& height, int n) {
         // Code here
-        vector<int> dp(n+1,-1);
-        return help(n-1,dp,height);
-        // return dp[n];
-    }
-    int help(int n,vector<int> &dp,vector<int> &height){
-        if(n==0) return 0;
-        if(dp[n]!=-1) return dp[n];
-        int left=help(n-1,dp,height)+abs(height[n]-height[n-1]);
-        int right=INT_MAX;
-        if(n>1){
-             right=help(n-2,dp,height)+abs(height[n]-height[n-2]);
+        vector<int> dp(n,0);
+        for(int i=1;i<n;i++){
+            int left=dp[i-1]+abs(height[i]-height[i-1]);
+            int right=INT_MAX;
+            if(i>1){
+                right=dp[i-2]+abs(height[i]-height[i-2]);
+            }
+            dp[i]=min(left,right);
         }
-        return  dp[n]=min(left,right);
+        return dp[n-1];
     }
 };
 
